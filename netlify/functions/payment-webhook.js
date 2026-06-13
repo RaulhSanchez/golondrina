@@ -11,14 +11,14 @@ const PRODUCTS_BY_PAYMENT_LINK = {
   }
 };
 
-// Transporte SMTP de Hotmail/Outlook
+// Transporte SMTP de Gmail
 const transporter = nodemailer.createTransport({
-  host: 'smtp-mail.outlook.com',
+  host: 'smtp.gmail.com',
   port: 587,
   secure: false,
   auth: {
-    user: process.env.FROM_EMAIL,
-    pass: process.env.EMAIL_PASSWORD
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD
   }
 });
 
@@ -77,7 +77,7 @@ exports.handler = async (event) => {
 
   try {
     await transporter.sendMail({
-      from: `Golondrina Guerrera <${process.env.FROM_EMAIL}>`,
+      from: `Golondrina Guerrera <${process.env.GMAIL_USER}>`,
       to: customerEmail,
       subject: `🎵 Tus láminas de "${product.title}" ya están aquí`,
       html: buildEmailHtml(product.title, customerName),
