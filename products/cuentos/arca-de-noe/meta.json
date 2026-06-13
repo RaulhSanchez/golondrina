@@ -6,7 +6,7 @@
   "price": 1.50,
   "currency": "EUR",
   "stripe_payment_link": "https://buy.stripe.com/28EaEP4dkeQD1eJ3MX1VK01",
-  "pdf_file": "products/cuentos/arca-de-noe/assets/pages/Canción Arca de Noe Alto Contraste.pdf",
+  "pdf_file": "products/cuentos/arca-de-noe/assets/pages/Cancion-Arca-de-Noe-Alto-Contraste.pdf",
   "pages": [
     { "file": "01.jpg", "caption": "El Señor le dijo a Noé que construyera el arca" },
     { "file": "02.jpg", "caption": "Los elefantes entran de dos en dos" },

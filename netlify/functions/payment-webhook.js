@@ -11,7 +11,7 @@ const PRODUCTS_BY_PAYMENT_LINK = {
     id: 'arca-de-noe',
     category: 'cuentos',
     title: 'El Arca de Noé',
-    pdfFile: 'products/cuentos/arca-de-noe/assets/pages/Canción Arca de Noe Alto Contraste.pdf'
+    pdfFile: 'products/cuentos/arca-de-noe/assets/pages/Cancion-Arca-de-Noe-Alto-Contraste.pdf'
   }
 };
 
@@ -81,7 +81,7 @@ exports.handler = async (event) => {
 
   try {
     const { error } = await resend.emails.send({
-      from: `Golondrina Guerrera <${process.env.FROM_EMAIL}>`,
+      from: 'Golondrina Guerrera <onboarding@resend.dev>',
       to: customerEmail,
       subject: `🎵 Tus láminas de "${product.title}" ya están aquí`,
       html: buildEmailHtml(product.title, customerName),
