@@ -5,7 +5,7 @@
   "description": "Una serie de 8 láminas ilustradas para que cantes El Arca de Noé con tu bebé. Cada imagen representa una estrofa de la canción: muéstrale la lámina mientras cantáis juntos y convierte la canción en un cuento visual.",
   "price": 1.50,
   "currency": "EUR",
-  "stripe_payment_link": "https://buy.stripe.com/eVqaEP9xE23R4qV5V51VK00",
+  "stripe_payment_link": "https://buy.stripe.com/28EaEP4dkeQD1eJ3MX1VK01",
   "pdf_file": "products/cuentos/arca-de-noe/assets/pages/Canción Arca de Noe Alto Contraste.pdf",
   "pages": [
     { "file": "01.jpg", "caption": "El Señor le dijo a Noé que construyera el arca" },
