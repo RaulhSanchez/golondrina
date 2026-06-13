@@ -1,0 +1,17 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno (contienen claves secretas, nunca subir)
+.env
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+
+# PDFs generados (se generan con npm run generate-pdf)
+# Comenta estas líneas si quieres incluir los PDFs en el repo
+# products/**/assets/*.pdf

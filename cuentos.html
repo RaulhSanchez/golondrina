@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuentos y Canciones | Golondrina Guerrera</title>
+    <meta name="description" content="Canciones ilustradas y cuentos para cantar y leer con tu bebé.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;">
+                    <img src="image.png" alt="Logo" class="logo-image">
+                    <span class="logo-text">Golondrina <span>Guerrera</span></span>
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html#proyectos">Proyectos</a>
+                <a href="index.html#nosotros">Sobre Nosotras</a>
+            </nav>
+            <a href="index.html" class="btn btn-secondary btn-sm"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+        </div>
+    </header>
+
+    <main class="catalog-main">
+        <div class="container">
+            <div class="catalog-header reveal">
+                <span class="badge">Cuentos y Canciones</span>
+                <h1>Canciones para cantar <span class="text-highlight">juntos</span></h1>
+                <p>Láminas ilustradas para convertir cada canción en un cuento visual con tu bebé.</p>
+            </div>
+
+            <div id="product-grid" class="proyectos-grid catalog-grid">
+                <div class="catalog-loading">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <p>Cargando productos...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal: preview del producto -->
+    <div id="product-modal" class="product-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+        <div class="modal-backdrop" onclick="closeProductModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Cerrar" onclick="closeProductModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Modal: recoger email antes de pagar -->
+    <div id="email-modal" class="product-modal" role="dialog" aria-modal="true" aria-labelledby="email-modal-title" hidden>
+        <div class="modal-backdrop" onclick="closeEmailModal()"></div>
+        <div class="modal-content modal-content--narrow">
+            <button class="modal-close" aria-label="Cerrar" onclick="closeEmailModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="email-modal-icon">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+
+            <h2 id="email-modal-title" class="email-modal-title">¿A qué correo enviamos las láminas?</h2>
+            <p class="email-modal-subtitle">
+                Recibirás el PDF en tu bandeja de entrada en cuanto se confirme el pago.
+            </p>
+
+            <form id="email-form" class="email-form" onsubmit="handleEmailSubmit(event)" novalidate>
+                <div class="email-field">
+                    <label for="buyer-email" class="email-label">Tu correo electrónico</label>
+                    <input
+                        type="email"
+                        id="buyer-email"
+                        name="email"
+                        class="email-input"
+                        placeholder="tu@correo.com"
+                        autocomplete="email"
+                        required
+                        aria-describedby="email-error"
+                    >
+                    <span id="email-error" class="email-error" role="alert" hidden></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg email-submit">
+                    Ir a pagar <span id="email-price-display"></span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <p class="email-modal-secure">
+                <i class="fa-solid fa-lock"></i> Pago seguro con Stripe &nbsp;·&nbsp;
+                <i class="fa-solid fa-shield-halved"></i> Nunca compartimos tu email
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <img src="image.png" alt="Logo" class="logo-image">
+                    <span class="logo-text">Golondrina <span>Guerrera</span></span>
+                </div>
+                <p>Inspiración, juegos y amor para ti y tu bebé.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Legal</h4>
+                    <a href="terminos.html">Términos y Condiciones</a>
+                    <a href="privacidad.html">Política de Privacidad</a>
+                    <a href="envios.html">Envíos y Devoluciones</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Golondrina Guerrera. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ── Datos ─────────────────────────────────────────────────────────────
+        const CATALOG_FALLBACK = [
+            {
+                id: "arca-de-noe",
+                title: "El Arca de Noé",
+                subtitle: "Canción ilustrada · 8 láminas",
+                description: "Una serie de 8 láminas ilustradas para que cantes El Arca de Noé con tu bebé. Cada imagen representa una estrofa: muéstrale la lámina mientras cantáis juntos.",
+                price: 1.50,
+                currency: "EUR",
+                tag: "Canción ilustrada",
+                icon: "fa-dove",
+                bg: "bg-pink",
+                ages: "0-3 años",
+                pages_count: 8,
+                stripe_payment_link: "https://buy.stripe.com/eVqaEP9xE23R4qV5V51VK00"
+            }
+        ];
+
+        // Estado de la compra en curso
+        let pendingPurchase = null;
+
+        // ── Helpers ───────────────────────────────────────────────────────────
+        async function loadCatalog() {
+            try {
+                const res = await fetch('products/cuentos/catalog.json');
+                if (!res.ok) throw new Error();
+                return await res.json();
+            } catch {
+                return CATALOG_FALLBACK;
+            }
+        }
+
+        function formatPrice(price, currency) {
+            return new Intl.NumberFormat('es-ES', { style: 'currency', currency }).format(price);
+        }
+
+        // ── Render de tarjeta ─────────────────────────────────────────────────
+        function renderCard(product) {
+            const price = formatPrice(product.price, product.currency);
+            return `
+                <div class="producto-card reveal" data-product-id="${product.id}">
+                    <div class="producto-img ${product.bg}">
+                        <i class="fa-solid ${product.icon}"></i>
+                        <span class="tag">${product.tag}</span>
+                    </div>
+                    <div class="producto-info">
+                        <div class="producto-meta">
+                            <span class="producto-age"><i class="fa-solid fa-baby"></i> ${product.ages}</span>
+                            <span class="producto-pages"><i class="fa-regular fa-image"></i> ${product.pages_count} láminas</span>
+                        </div>
+                        <h3>${product.title}</h3>
+                        <p>${product.description}</p>
+                        <div class="producto-actions">
+                            <button class="btn btn-outline btn-preview"
+                                    onclick="openProductModal('${product.id}')">
+                                <i class="fa-regular fa-eye"></i> Ver preview
+                            </button>
+                            <button class="btn btn-primary btn-buy"
+                                    onclick="openEmailModal('${product.id}', '${product.stripe_payment_link}', ${product.price}, '${product.currency}')">
+                                Comprar <span class="price-badge">${price}</span>
+                                <i class="fa-solid fa-lock"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ── Modal: preview del producto ───────────────────────────────────────
+        async function openProductModal(productId) {
+            const modal = document.getElementById('product-modal');
+            const body  = document.getElementById('modal-body');
+            body.innerHTML = '<div class="modal-loading"><i class="fa-solid fa-spinner fa-spin"></i></div>';
+            modal.hidden = false;
+            document.body.style.overflow = 'hidden';
+
+            let meta;
+            try {
+                const res = await fetch(`products/cuentos/${productId}/meta.json`);
+                meta = await res.json();
+            } catch {
+                meta = { ...CATALOG_FALLBACK.find(p => p.id === productId), pages: [] };
+            }
+
+            body.innerHTML = `
+                <div class="modal-header">
+                    <h2 id="modal-title">${meta.title}</h2>
+                    <p>${meta.subtitle ?? ''}</p>
+                </div>
+                <div class="modal-preview-grid">
+                    ${(meta.pages ?? []).slice(0, 3).map(page => `
+                        <figure class="preview-page">
+                            <img src="products/cuentos/${meta.id}/assets/pages/${page.file}"
+                                 alt="${page.caption}"
+                                 onerror="this.closest('figure').classList.add('img-placeholder')">
+                            <figcaption>${page.caption}</figcaption>
+                        </figure>
+                    `).join('')}
+                    ${(meta.pages ?? []).length > 3 ? `
+                        <div class="preview-more">
+                            <i class="fa-solid fa-images"></i>
+                            <p>+${meta.pages.length - 3} láminas más</p>
+                        </div>
+                    ` : ''}
+                </div>
+                <div class="modal-cta">
+                    <p class="modal-price">${formatPrice(meta.price, meta.currency)}</p>
+                    <button class="btn btn-primary btn-lg"
+                            onclick="closeProductModal(); openEmailModal('${meta.id}', '${meta.stripe_payment_link}', ${meta.price}, '${meta.currency}')">
+                        Comprar ahora <i class="fa-solid fa-lock"></i>
+                    </button>
+                    <p class="modal-secure">
+                        <i class="fa-solid fa-shield-halved"></i> Pago seguro con Stripe · PDF en tu correo al instante
+                    </p>
+                </div>
+            `;
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').hidden = true;
+            document.body.style.overflow = '';
+        }
+
+        // ── Modal: recoger email ──────────────────────────────────────────────
+        function openEmailModal(productId, stripeLink, price, currency) {
+            pendingPurchase = { productId, stripeLink, price, currency };
+
+            document.getElementById('email-price-display').textContent = formatPrice(price, currency);
+            document.getElementById('buyer-email').value = '';
+            hideEmailError();
+
+            const modal = document.getElementById('email-modal');
+            modal.hidden = false;
+            document.body.style.overflow = 'hidden';
+            // Foco automático en el input de email
+            setTimeout(() => document.getElementById('buyer-email').focus(), 100);
+        }
+
+        function closeEmailModal() {
+            document.getElementById('email-modal').hidden = true;
+            document.body.style.overflow = '';
+            pendingPurchase = null;
+        }
+
+        function showEmailError(msg) {
+            const el = document.getElementById('email-error');
+            el.textContent = msg;
+            el.hidden = false;
+            document.getElementById('buyer-email').setAttribute('aria-invalid', 'true');
+        }
+
+        function hideEmailError() {
+            const el = document.getElementById('email-error');
+            el.hidden = true;
+            document.getElementById('buyer-email').removeAttribute('aria-invalid');
+        }
+
+        function handleEmailSubmit(e) {
+            e.preventDefault();
+            hideEmailError();
+
+            const email = document.getElementById('buyer-email').value.trim();
+
+            // Validación básica antes de saltar a Stripe
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showEmailError('Introduce un correo electrónico válido.');
+                document.getElementById('buyer-email').focus();
+                return;
+            }
+
+            if (!pendingPurchase) return;
+
+            // Redirigir a Stripe con el email pre-rellenado
+            // Stripe lo muestra en el checkout y lo incluye en el webhook
+            const url = `${pendingPurchase.stripeLink}?prefilled_email=${encodeURIComponent(email)}`;
+            window.location.href = url;
+        }
+
+        // Cerrar modales con Escape
+        document.addEventListener('keydown', e => {
+            if (e.key !== 'Escape') return;
+            if (!document.getElementById('email-modal').hidden)   closeEmailModal();
+            else if (!document.getElementById('product-modal').hidden) closeProductModal();
+        });
+
+        // ── Header scroll ─────────────────────────────────────────────────────
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+
+        // ── Animaciones reveal ────────────────────────────────────────────────
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // ── Inicializar catálogo ──────────────────────────────────────────────
+        loadCatalog().then(products => {
+            const grid = document.getElementById('product-grid');
+            if (!products.length) {
+                grid.innerHTML = '<p class="catalog-empty">No hay productos disponibles todavía. ¡Vuelve pronto!</p>';
+                return;
+            }
+            grid.innerHTML = products.map(renderCard).join('');
+            grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+{
+  "id": "arca-de-noe",
+  "title": "El Arca de Noé",
+  "subtitle": "Canción ilustrada",
+  "description": "Una serie de 8 láminas ilustradas para que cantes El Arca de Noé con tu bebé. Cada imagen representa una estrofa de la canción: muéstrale la lámina mientras cantáis juntos y convierte la canción en un cuento visual.",
+  "price": 1.50,
+  "currency": "EUR",
+  "stripe_payment_link": "https://buy.stripe.com/eVqaEP9xE23R4qV5V51VK00",
+  "pdf_file": "products/cuentos/arca-de-noe/assets/pages/Canción Arca de Noe Alto Contraste.pdf",
+  "pages": [
+    { "file": "01.jpg", "caption": "El Señor le dijo a Noé que construyera el arca" },
+    { "file": "02.jpg", "caption": "Los elefantes entran de dos en dos" },
+    { "file": "03.jpg", "caption": "Los leones suben al arca rugiendo" },
+    { "file": "04.jpg", "caption": "Empieza la lluvia, llueve sin parar" },
+    { "file": "05.jpg", "caption": "El arco iris aparece en el cielo" },
+    { "file": "06.jpg", "caption": "La paloma trae la rama de olivo" },
+    { "file": "07.jpg", "caption": "El arca llega a tierra firme" },
+    { "file": "08.jpg", "caption": "¡Los animales salen felices!" }
+  ]
+}

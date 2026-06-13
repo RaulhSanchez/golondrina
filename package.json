@@ -1,0 +1,21 @@
+{
+  "name": "golondrina-guerrera",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Golondrina Guerrera — tienda de materiales para bebés",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "resend": "^3.5.0",
+    "stripe": "^14.25.0"
+  },
+  "devDependencies": {
+    "pdf-lib": "^1.17.1"
+  },
+  "scripts": {
+    "generate-pdf": "node scripts/generate-pdf.js",
+    "test-email": "node scripts/test-email.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

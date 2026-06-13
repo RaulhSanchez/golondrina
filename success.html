@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias por tu compra! | Golondrina Guerrera</title>
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;">
+                    <img src="image.png" alt="Logo" class="logo-image">
+                    <span class="logo-text">Golondrina <span>Guerrera</span></span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="success-main">
+        <div class="container">
+
+            <div class="success-hero reveal">
+                <div class="success-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                <h1>¡Pago completado!</h1>
+                <p class="success-email-notice">
+                    <i class="fa-solid fa-circle-check" style="color:#27ae60;"></i>
+                    Hemos enviado el PDF con tus láminas al correo que indicaste.<br>
+                    <span style="font-size:0.9em;color:var(--text-light);">Revisa también la carpeta de spam por si acaso.</span>
+                </p>
+            </div>
+
+            <div id="product-title" class="success-product-title reveal reveal-delay-1"></div>
+
+            <div class="success-instructions reveal">
+                <h2><i class="fa-solid fa-lightbulb"></i> Cómo usar tus láminas</h2>
+                <div class="instructions-grid">
+                    <div class="instruction-step">
+                        <div class="step-number">1</div>
+                        <p>Imprime las láminas en A4 o A5. Puedes plastificarlas para que duren más.</p>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-number">2</div>
+                        <p>Colócalas en orden y úsalas mientras cantáis juntos la canción.</p>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-number">3</div>
+                        <p>Señala cada imagen con el dedo y deja que tu bebé la explore con la mirada.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-back">
+                <a href="cuentos.html" class="btn btn-secondary">
+                    <i class="fa-solid fa-arrow-left"></i> Ver más productos
+                </a>
+                <a href="index.html" class="btn btn-outline">Ir al inicio</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Golondrina Guerrera. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const PRODUCTS_META = {
+            "arca-de-noe": {
+                id: "arca-de-noe",
+                title: "El Arca de Noé",
+                subtitle: "Canción ilustrada · 8 láminas",
+                pages: [
+                    { file: "01.jpg", caption: "El Señor le dijo a Noé que construyera el arca" },
+                    { file: "02.jpg", caption: "Los elefantes entran de dos en dos" },
+                    { file: "03.jpg", caption: "Los leones suben al arca rugiendo" },
+                    { file: "04.jpg", caption: "Empieza la lluvia, llueve sin parar" },
+                    { file: "05.jpg", caption: "El arco iris aparece en el cielo" },
+                    { file: "06.jpg", caption: "La paloma trae la rama de olivo" },
+                    { file: "07.jpg", caption: "El arca llega a tierra firme" },
+                    { file: "08.jpg", caption: "¡Los animales salen felices!" }
+                ]
+            }
+        };
+
+        async function loadProductMeta(productId) {
+            try {
+                const res = await fetch(`products/cuentos/${productId}/meta.json`);
+                if (!res.ok) throw new Error();
+                return await res.json();
+            } catch {
+                return PRODUCTS_META[productId] ?? null;
+            }
+        }
+
+        function renderPages(meta) {
+            document.getElementById('product-title').innerHTML = `
+                <h2>${meta.title}</h2>
+                <p>${meta.subtitle ?? ''}</p>
+            `;
+
+            const grid = document.getElementById('pages-grid');
+            grid.innerHTML = meta.pages.map((page, i) => `
+                <figure class="success-page reveal reveal-delay-${Math.min(i + 1, 5)}" style="--page-index:${i}">
+                    <div class="page-number">${i + 1}</div>
+                    <img src="products/cuentos/${meta.id}/assets/pages/${page.file}"
+                         alt="${page.caption}"
+                         loading="lazy"
+                         onerror="this.closest('figure').classList.add('img-placeholder')">
+                    <figcaption>${page.caption}</figcaption>
+                </figure>
+            `).join('');
+
+            grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        }
+
+        // Header scroll
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+
+        // Animaciones reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Leer producto de la URL: ?product=arca-de-noe
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('product') ?? 'arca-de-noe';
+
+        loadProductMeta(productId).then(meta => {
+            if (!meta) {
+                document.getElementById('pages-grid').innerHTML =
+                    '<p class="catalog-empty">No se encontraron las láminas. Escríbenos a hola@golondrinaguerrera.com</p>';
+                return;
+            }
+            renderPages(meta);
+        });
+    </script>
+</body>
+
+</html>

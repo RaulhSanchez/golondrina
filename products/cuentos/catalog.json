@@ -1,0 +1,16 @@
+[
+  {
+    "id": "arca-de-noe",
+    "title": "El Arca de Noé",
+    "subtitle": "Canción ilustrada · 8 láminas",
+    "description": "Una serie de 8 láminas ilustradas para que cantes El Arca de Noé con tu bebé. Cada imagen representa una estrofa de la canción: muéstrale la lámina mientras cantáis juntos.",
+    "price": 1.50,
+    "currency": "EUR",
+    "tag": "Canción ilustrada",
+    "icon": "fa-dove",
+    "bg": "bg-pink",
+    "ages": "0-3 años",
+    "pages_count": 8,
+    "stripe_payment_link": "https://buy.stripe.com/eVqaEP9xE23R4qV5V51VK00"
+  }
+]
