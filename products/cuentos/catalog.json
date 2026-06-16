@@ -25,7 +25,7 @@
     "bg": "bg-mint",
     "ages": "0-3 años",
     "pages_count": 8,
-    "stripe_payment_link": "PENDIENTE"
+    "stripe_payment_link": "https://buy.stripe.com/14AcMX8tA8sf9Lf4R11VK03"
   },
   {
     "id": "estrellita-donde-estas",
@@ -39,6 +39,6 @@
     "bg": "bg-lavender",
     "ages": "0-3 años",
     "pages_count": 8,
-    "stripe_payment_link": "PENDIENTE"
+    "stripe_payment_link": "https://buy.stripe.com/8x28wHbFMdMz0aF4R11VK02"
   }
 ]
