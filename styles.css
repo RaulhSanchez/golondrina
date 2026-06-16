@@ -648,6 +648,10 @@ img {
     background-color: var(--color-accent-lilac);
 }
 
+.bg-lavender {
+    background-color: #d8d0f0;
+}
+
 .tag {
     position: absolute;
     top: 20px;
@@ -1038,6 +1042,10 @@ img {
         text-align: center;
     }
 
+    .hero {
+        padding: 120px 0 80px;
+    }
+
     .hero-content h1 {
         font-size: 3rem;
     }
@@ -1053,6 +1061,10 @@ img {
 
     .hero-image-wrapper {
         margin-top: 40px;
+    }
+
+    .nosotras-container {
+        gap: 40px;
     }
 
     .proyectos-grid {
@@ -1079,6 +1091,57 @@ img {
         display: flex;
     }
 
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-image-blob {
+        width: 300px;
+        height: 300px;
+    }
+
+    .floating-item {
+        display: none;
+    }
+
+    .shape-1 {
+        width: 200px;
+        height: 200px;
+        right: -60px;
+        top: -60px;
+    }
+
+    .shape-2 {
+        width: 150px;
+        height: 150px;
+        left: -60px;
+    }
+
+    .shape-3 {
+        display: none;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .section-header {
+        margin-bottom: 40px;
+        max-width: 100%;
+    }
+
+    .filosofia {
+        padding: 80px 0;
+    }
+
+    .proyectos {
+        padding: 80px 0;
+    }
+
     .producto-card {
         flex-direction: column;
     }
@@ -1088,19 +1151,45 @@ img {
         height: 200px;
     }
 
+    .sobre-nosotras {
+        padding: 80px 0;
+    }
+
+    .photo-frame {
+        width: 280px;
+        height: 320px;
+    }
+
+    .photo-decor {
+        display: none;
+    }
+
+    .nosotras-content h2 {
+        font-size: 2rem;
+    }
+
+    .cta-final {
+        padding: 80px 0;
+    }
+
     .cta-final h2 {
         font-size: 2.2rem;
     }
 
-    .hero-content h1 {
-        font-size: 2.4rem;
+    .footer {
+        padding: 60px 0 20px;
     }
 
     .footer-links {
         flex-direction: column;
-        gap: 40px;
+        gap: 24px;
     }
-}}
+
+    .modal-close {
+        width: 44px;
+        height: 44px;
+    }
+}
 
 /* ==========================================================================
    Catálogo (cuentos.html / juegos.html)
@@ -1562,12 +1651,24 @@ img {
     .instructions-grid { grid-template-columns: 1fr; }
     .producto-actions { flex-direction: column; }
     .success-pages-grid { grid-template-columns: repeat(2, 1fr); }
+    .catalog-main { padding: 120px 0 80px; }
+    .success-main { padding: 120px 0 80px; }
+    .success-instructions { padding: 32px 24px; }
 }
 
 @media (max-width: 480px) {
     .modal-preview-grid { grid-template-columns: 1fr; }
     .success-pages-grid { grid-template-columns: 1fr; }
-    .catalog-header h1 { font-size: 2rem; }
+    .catalog-main { padding: 100px 0 60px; }
+    .catalog-header { max-width: 100%; }
+    .catalog-header h1 { font-size: 1.8rem; }
+    .success-main { padding: 100px 0 60px; }
+    .success-hero { max-width: 100%; }
+    .success-hero h1 { font-size: 1.9rem; }
+    .success-instructions { padding: 28px 16px; }
+    .modal-content { padding: 20px 16px; }
+    .modal-content--narrow { padding: 32px 20px 24px; }
+    .modal-header h2 { font-size: 1.5rem; }
 }
 
 /* Success page — email notice */
@@ -1689,6 +1790,132 @@ img {
 
 @media (max-width: 480px) {
     .modal-content--narrow {
-        padding: 40px 24px 32px;
+        padding: 32px 20px 24px;
+    }
+}
+
+/* ==========================================================================
+   Móvil pequeño (< 480px) — ajustes generales
+   ========================================================================== */
+@media (max-width: 480px) {
+
+    .logo {
+        font-size: 1.2rem;
+        gap: 8px;
+    }
+
+    .logo-image {
+        width: 40px;
+        height: 40px;
+    }
+
+    .hero {
+        padding: 80px 0 40px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.9rem;
+        letter-spacing: -0.5px;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-lg {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-features {
+        flex-direction: column;
+        gap: 10px;
+        font-size: 0.85rem;
+    }
+
+    .hero-image-blob {
+        width: 240px;
+        height: 240px;
+    }
+
+    .section-header h2 {
+        font-size: 1.7rem;
+    }
+
+    .section-header {
+        margin-bottom: 28px;
+    }
+
+    .filosofia {
+        padding: 60px 0;
+    }
+
+    .filosofia-card {
+        padding: 28px 16px;
+    }
+
+    .proyectos {
+        padding: 60px 0;
+    }
+
+    .producto-info {
+        padding: 24px 16px;
+    }
+
+    .producto-info h3 {
+        font-size: 1.4rem;
+    }
+
+    .sobre-nosotras {
+        padding: 60px 0;
+    }
+
+    .nosotras-container {
+        gap: 24px;
+    }
+
+    .photo-frame {
+        width: 220px;
+        height: 250px;
+    }
+
+    .nosotras-content h2 {
+        font-size: 1.6rem;
+    }
+
+    .cta-final {
+        padding: 60px 0;
+    }
+
+    .cta-final h2 {
+        font-size: 1.9rem;
+    }
+
+    .cta-final p {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    .footer {
+        padding: 40px 0 16px;
+    }
+
+    .footer-links {
+        gap: 20px;
+    }
+
+    .btn-sm {
+        min-height: 44px;
+        padding: 12px 20px;
+    }
+
+    .btn-outline {
+        min-height: 44px;
     }
 }
