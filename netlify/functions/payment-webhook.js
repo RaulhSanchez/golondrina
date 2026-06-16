@@ -66,7 +66,7 @@ exports.handler = async (event) => {
     return { statusCode: 200, body: 'Producto no reconocido, omitido' };
   }
 
-  const pdfPath = path.join(process.cwd(), product.pdfFile);
+  const pdfPath = path.join(__dirname, '..', '..', product.pdfFile);
   let pdfBuffer;
   try {
     pdfBuffer = fs.readFileSync(pdfPath);
@@ -136,7 +136,7 @@ function buildEmailHtml(productTitle, customerName) {
 
     <div style="background:#2C3E50;padding:24px 40px;text-align:center;">
       <p style="margin:0 0 6px;font-size:12px;color:rgba(255,255,255,0.5);">
-        ¿Alguna duda? Escríbenos a <a href="mailto:${process.env.FROM_EMAIL}" style="color:#FFD1DC;">${process.env.FROM_EMAIL}</a>
+        ¿Alguna duda? Escríbenos a <a href="mailto:${process.env.GMAIL_USER}" style="color:#FFD1DC;">${process.env.GMAIL_USER}</a>
       </p>
       <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.3);">© 2026 Golondrina Guerrera</p>
     </div>
