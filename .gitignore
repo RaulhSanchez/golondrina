@@ -15,3 +15,6 @@ Thumbs.db
 # PDFs generados (se generan con npm run generate-pdf)
 # Comenta estas líneas si quieres incluir los PDFs en el repo
 # products/**/assets/*.pdf
+
+# Local Netlify folder
+.netlify
