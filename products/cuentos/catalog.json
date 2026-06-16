@@ -12,5 +12,33 @@
     "ages": "0-3 años",
     "pages_count": 8,
     "stripe_payment_link": "https://buy.stripe.com/28EaEP4dkeQD1eJ3MX1VK01"
+  },
+  {
+    "id": "cocodrilo-en-la-cueva",
+    "title": "Cocodrilo en la Cueva",
+    "subtitle": "Canción ilustrada",
+    "description": "Láminas ilustradas para cantar Cocodrilo en la Cueva con tu bebé. Muéstrale cada imagen mientras cantáis juntos y estimulad el lenguaje desde los primeros meses.",
+    "price": 1.50,
+    "currency": "EUR",
+    "tag": "Canción ilustrada",
+    "icon": "fa-dragon",
+    "bg": "bg-mint",
+    "ages": "0-3 años",
+    "pages_count": 8,
+    "stripe_payment_link": "PENDIENTE"
+  },
+  {
+    "id": "estrellita-donde-estas",
+    "title": "Estrellita ¿Dónde Estás?",
+    "subtitle": "Canción ilustrada",
+    "description": "Láminas ilustradas para cantar Estrellita ¿Dónde Estás? con tu bebé. Una canción clásica convertida en cuento visual para los momentos más especiales del día.",
+    "price": 1.50,
+    "currency": "EUR",
+    "tag": "Canción ilustrada",
+    "icon": "fa-star",
+    "bg": "bg-lavender",
+    "ages": "0-3 años",
+    "pages_count": 8,
+    "stripe_payment_link": "PENDIENTE"
   }
 ]

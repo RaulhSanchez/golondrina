@@ -8,6 +8,16 @@ const PRODUCTS_BY_PAYMENT_LINK = {
     id: 'arca-de-noe',
     title: 'El Arca de Noé',
     pdfFile: 'products/cuentos/arca-de-noe/assets/pages/Cancion-Arca-de-Noe-Alto-Contraste.pdf'
+  },
+  [process.env.PAYMENT_LINK_COCODRILO_EN_LA_CUEVA]: {
+    id: 'cocodrilo-en-la-cueva',
+    title: 'Cocodrilo en la Cueva',
+    pdfFile: 'products/cuentos/cocodrilo-en-la-cueva/assets/pages/Cocodrilo-en-la-Cueva.pdf'
+  },
+  [process.env.PAYMENT_LINK_ESTRELLITA_DONDE_ESTAS]: {
+    id: 'estrellita-donde-estas',
+    title: 'Estrellita ¿Dónde Estás?',
+    pdfFile: 'products/cuentos/estrellita-donde-estas/assets/pages/Estrellita-donde-estas.pdf'
   }
 };
 
