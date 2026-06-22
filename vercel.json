@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "functions": {
+    "api/payment-webhook.js": {
+      "memory": 512,
+      "maxDuration": 30,
+      "includeFiles": "products/**"
+    }
+  },
+  "headers": [
+    {
+      "source": "/success.html",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+    },
+    {
+      "source": "/products/(.*)/assets/pages/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ]
+}
