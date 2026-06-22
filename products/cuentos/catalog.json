@@ -2,22 +2,22 @@
   {
     "id": "arca-de-noe",
     "title": "El Arca de Noé",
-    "subtitle": "Canción ilustrada · 8 láminas",
-    "description": "Una serie de 8 láminas ilustradas para que cantes El Arca de Noé con tu bebé. Cada imagen representa una estrofa de la canción: muéstrale la lámina mientras cantáis juntos.",
+    "subtitle": "Canción ilustrada · 5 láminas",
+    "description": "Una serie de 5 láminas ilustradas para que cantes El Arca de Noé con tu bebé. Cada imagen representa una estrofa de la canción: muéstrale la lámina mientras cantáis juntos.",
     "price": 1.50,
     "currency": "EUR",
     "tag": "Canción ilustrada",
     "icon": "fa-dove",
     "bg": "bg-pink",
     "ages": "0-3 años",
-    "pages_count": 8,
+    "pages_count": 5,
     "cover_image": "products/cuentos/arca-de-noe/cover.jpg",
     "stripe_payment_link": "https://buy.stripe.com/28EaEP4dkeQD1eJ3MX1VK01"
   },
   {
     "id": "cocodrilo-en-la-cueva",
     "title": "Cocodrilo en la Cueva",
-    "subtitle": "Canción ilustrada",
+    "subtitle": "Canción ilustrada · 7 láminas",
     "description": "Láminas ilustradas para cantar Cocodrilo en la Cueva con tu bebé. Muéstrale cada imagen mientras cantáis juntos y estimulad el lenguaje desde los primeros meses.",
     "price": 1.50,
     "currency": "EUR",
@@ -25,14 +25,14 @@
     "icon": "fa-dragon",
     "bg": "bg-mint",
     "ages": "0-3 años",
-    "pages_count": 8,
+    "pages_count": 7,
     "cover_image": "products/cuentos/cocodrilo-en-la-cueva/cover.jpg",
     "stripe_payment_link": "https://buy.stripe.com/14AcMX8tA8sf9Lf4R11VK03"
   },
   {
     "id": "estrellita-donde-estas",
     "title": "Estrellita ¿Dónde Estás?",
-    "subtitle": "Canción ilustrada",
+    "subtitle": "Canción ilustrada · 4 láminas",
     "description": "Láminas ilustradas para cantar Estrellita ¿Dónde Estás? con tu bebé. Una canción clásica convertida en cuento visual para los momentos más especiales del día.",
     "price": 1.50,
     "currency": "EUR",
@@ -40,7 +40,7 @@
     "icon": "fa-star",
     "bg": "bg-lavender",
     "ages": "0-3 años",
-    "pages_count": 8,
+    "pages_count": 4,
     "cover_image": "products/cuentos/estrellita-donde-estas/cover.jpg",
     "stripe_payment_link": "https://buy.stripe.com/8x28wHbFMdMz0aF4R11VK02"
   }
