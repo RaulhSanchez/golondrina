@@ -22,6 +22,99 @@
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── Tarjeta con portada real ── */
+        .producto-img--cover {
+            width: 200px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .producto-img--cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .producto-img--cover { width: 100%; height: 220px; }
+        }
+
+        /* ── Visor PDF con marca de agua ── */
+        .pdf-viewer-wrap {
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .pdf-viewer-wrap canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            pointer-events: none;
+        }
+        .pdf-watermark {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .pdf-watermark::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 60px,
+                rgba(255,182,193,0.08) 60px,
+                rgba(255,182,193,0.08) 61px
+            );
+        }
+        .pdf-watermark-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+        }
+        .pdf-watermark-text span {
+            font-family: 'Baloo 2', cursive;
+            font-size: clamp(14px, 3vw, 22px);
+            font-weight: 800;
+            color: rgba(44,62,80,0.12);
+            transform: rotate(-30deg);
+            white-space: nowrap;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .pdf-loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+        .pdf-loading i { font-size: 2rem; display: block; margin-bottom: 12px; color: var(--color-primary); }
+        .pdf-page-label {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        .pdf-more-notice {
+            text-align: center;
+            padding: 20px;
+            background: var(--color-bg-warm);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .pdf-more-notice i { color: var(--color-primary-dark); margin-right: 6px; }
+    </style>
 </head>
 
 <body>
@@ -142,27 +235,47 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
         // ── Datos ─────────────────────────────────────────────────────────────
         const CATALOG_FALLBACK = [
             {
                 id: "arca-de-noe",
                 title: "El Arca de Noé",
                 subtitle: "Canción ilustrada · 8 láminas",
-                description: "Una serie de 8 láminas ilustradas para que cantes El Arca de Noé con tu bebé. Cada imagen representa una estrofa: muéstrale la lámina mientras cantáis juntos.",
-                price: 1.50,
-                currency: "EUR",
-                tag: "Canción ilustrada",
-                icon: "fa-dove",
-                bg: "bg-pink",
-                ages: "0-3 años",
-                pages_count: 8,
+                description: "Una serie de 8 láminas ilustradas para que cantes El Arca de Noé con tu bebé.",
+                price: 1.50, currency: "EUR", tag: "Canción ilustrada",
+                icon: "fa-dove", bg: "bg-pink", ages: "0-3 años", pages_count: 8,
+                cover_image: "products/cuentos/arca-de-noe/cover.jpg",
                 stripe_payment_link: "https://buy.stripe.com/28EaEP4dkeQD1eJ3MX1VK01"
+            },
+            {
+                id: "cocodrilo-en-la-cueva",
+                title: "Cocodrilo en la Cueva",
+                subtitle: "Canción ilustrada",
+                description: "Láminas ilustradas para cantar Cocodrilo en la Cueva con tu bebé.",
+                price: 1.50, currency: "EUR", tag: "Canción ilustrada",
+                icon: "fa-dragon", bg: "bg-mint", ages: "0-3 años", pages_count: 8,
+                cover_image: "products/cuentos/cocodrilo-en-la-cueva/cover.jpg",
+                stripe_payment_link: "https://buy.stripe.com/14AcMX8tA8sf9Lf4R11VK03"
+            },
+            {
+                id: "estrellita-donde-estas",
+                title: "Estrellita ¿Dónde Estás?",
+                subtitle: "Canción ilustrada",
+                description: "Láminas ilustradas para cantar Estrellita ¿Dónde Estás? con tu bebé.",
+                price: 1.50, currency: "EUR", tag: "Canción ilustrada",
+                icon: "fa-star", bg: "bg-lavender", ages: "0-3 años", pages_count: 8,
+                cover_image: "products/cuentos/estrellita-donde-estas/cover.jpg",
+                stripe_payment_link: "https://buy.stripe.com/8x28wHbFMdMz0aF4R11VK02"
             }
         ];
 
-        // Estado de la compra en curso
         let pendingPurchase = null;
+        let catalog = [];
 
         // ── Helpers ───────────────────────────────────────────────────────────
         async function loadCatalog() {
@@ -179,15 +292,22 @@
             return new Intl.NumberFormat('es-ES', { style: 'currency', currency }).format(price);
         }
 
-        // ── Render de tarjeta ─────────────────────────────────────────────────
+        // ── Render de tarjeta con portada real ────────────────────────────────
         function renderCard(product) {
             const price = formatPrice(product.price, product.currency);
+            const imgSection = product.cover_image
+                ? `<div class="producto-img--cover">
+                       <img src="${product.cover_image}" alt="Portada ${product.title}" loading="lazy">
+                       <span class="tag">${product.tag}</span>
+                   </div>`
+                : `<div class="producto-img ${product.bg}">
+                       <i class="fa-solid ${product.icon}"></i>
+                       <span class="tag">${product.tag}</span>
+                   </div>`;
+
             return `
                 <div class="producto-card reveal" data-product-id="${product.id}">
-                    <div class="producto-img ${product.bg}">
-                        <i class="fa-solid ${product.icon}"></i>
-                        <span class="tag">${product.tag}</span>
-                    </div>
+                    ${imgSection}
                     <div class="producto-info">
                         <div class="producto-meta">
                             <span class="producto-age"><i class="fa-solid fa-baby"></i> ${product.ages}</span>
@@ -211,47 +331,84 @@
             `;
         }
 
+        // ── Renderizar páginas PDF con marca de agua ──────────────────────────
+        const PREVIEW_PAGES = 3;
+
+        async function renderPdfPreview(pdfUrl, container) {
+            container.innerHTML = '<div class="pdf-loading"><i class="fa-solid fa-spinner fa-spin"></i><p>Cargando preview…</p></div>';
+
+            try {
+                const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
+                const total = pdf.numPages;
+                const pagesToShow = Math.min(PREVIEW_PAGES, total);
+                container.innerHTML = '';
+
+                for (let i = 1; i <= pagesToShow; i++) {
+                    const page = await pdf.getPage(i);
+                    const viewport = page.getViewport({ scale: 1.5 });
+                    const canvas = document.createElement('canvas');
+                    canvas.width  = viewport.width;
+                    canvas.height = viewport.height;
+                    await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+
+                    // Wrap con marca de agua
+                    const wrap = document.createElement('div');
+                    wrap.className = 'pdf-viewer-wrap';
+                    wrap.style.position = 'relative';
+
+                    const wm = document.createElement('div');
+                    wm.className = 'pdf-watermark';
+                    wm.innerHTML = `<div class="pdf-watermark-text">
+                        <span>Golondrina Guerrera</span>
+                        <span>Golondrina Guerrera</span>
+                        <span>Golondrina Guerrera</span>
+                    </div>`;
+
+                    wrap.appendChild(canvas);
+                    wrap.appendChild(wm);
+
+                    const label = document.createElement('p');
+                    label.className = 'pdf-page-label';
+                    label.textContent = `Lámina ${i} de ${total}`;
+
+                    container.appendChild(wrap);
+                    container.appendChild(label);
+                }
+
+                if (total > PREVIEW_PAGES) {
+                    const notice = document.createElement('div');
+                    notice.className = 'pdf-more-notice';
+                    notice.innerHTML = `<i class="fa-solid fa-lock"></i> ${total - PREVIEW_PAGES} láminas más incluidas al comprar`;
+                    container.appendChild(notice);
+                }
+            } catch (err) {
+                container.innerHTML = '<p style="text-align:center;color:#888;">No se pudo cargar el preview.</p>';
+            }
+        }
+
         // ── Modal: preview del producto ───────────────────────────────────────
         async function openProductModal(productId) {
             const modal = document.getElementById('product-modal');
             const body  = document.getElementById('modal-body');
-            body.innerHTML = '<div class="modal-loading"><i class="fa-solid fa-spinner fa-spin"></i></div>';
             modal.hidden = false;
             document.body.style.overflow = 'hidden';
 
-            let meta;
-            try {
-                const res = await fetch(`products/cuentos/${productId}/meta.json`);
-                meta = await res.json();
-            } catch {
-                meta = { ...CATALOG_FALLBACK.find(p => p.id === productId), pages: [] };
-            }
+            const product = catalog.find(p => p.id === productId) ||
+                            CATALOG_FALLBACK.find(p => p.id === productId);
+
+            const pdfUrl = `products/cuentos/${productId}/assets/pages/${getPdfFilename(productId)}`;
+            const price  = formatPrice(product.price, product.currency);
 
             body.innerHTML = `
                 <div class="modal-header">
-                    <h2 id="modal-title">${meta.title}</h2>
-                    <p>${meta.subtitle ?? ''}</p>
+                    <h2 id="modal-title">${product.title}</h2>
+                    <p>${product.subtitle ?? ''}</p>
                 </div>
-                <div class="modal-preview-grid">
-                    ${(meta.pages ?? []).slice(0, 3).map(page => `
-                        <figure class="preview-page">
-                            <img src="products/cuentos/${meta.id}/assets/pages/${page.file}"
-                                 alt="${page.caption}"
-                                 onerror="this.closest('figure').classList.add('img-placeholder')">
-                            <figcaption>${page.caption}</figcaption>
-                        </figure>
-                    `).join('')}
-                    ${(meta.pages ?? []).length > 3 ? `
-                        <div class="preview-more">
-                            <i class="fa-solid fa-images"></i>
-                            <p>+${meta.pages.length - 3} láminas más</p>
-                        </div>
-                    ` : ''}
-                </div>
+                <div id="pdf-preview-container"></div>
                 <div class="modal-cta">
-                    <p class="modal-price">${formatPrice(meta.price, meta.currency)}</p>
+                    <p class="modal-price">${price}</p>
                     <button class="btn btn-primary btn-lg"
-                            onclick="closeProductModal(); openEmailModal('${meta.id}', '${meta.stripe_payment_link}', ${meta.price}, '${meta.currency}')">
+                            onclick="closeProductModal(); openEmailModal('${product.id}', '${product.stripe_payment_link}', ${product.price}, '${product.currency}')">
                         Comprar ahora <i class="fa-solid fa-lock"></i>
                     </button>
                     <p class="modal-secure">
@@ -259,6 +416,20 @@
                     </p>
                 </div>
             `;
+
+            // Bloquear menú contextual en el modal
+            body.addEventListener('contextmenu', e => e.preventDefault());
+
+            await renderPdfPreview(pdfUrl, document.getElementById('pdf-preview-container'));
+        }
+
+        function getPdfFilename(productId) {
+            const map = {
+                'arca-de-noe':          'Cancion-Arca-de-Noe-Alto-Contraste.pdf',
+                'cocodrilo-en-la-cueva':'Cocodrilo-en-la-Cueva.pdf',
+                'estrellita-donde-estas':'Estrellita-donde-estas.pdf'
+            };
+            return map[productId] ?? '';
         }
 
         function closeProductModal() {
@@ -346,6 +517,7 @@
 
         // ── Inicializar catálogo ──────────────────────────────────────────────
         loadCatalog().then(products => {
+            catalog = products;
             const grid = document.getElementById('product-grid');
             if (!products.length) {
                 grid.innerHTML = '<p class="catalog-empty">No hay productos disponibles todavía. ¡Vuelve pronto!</p>';

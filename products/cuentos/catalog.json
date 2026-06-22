@@ -11,6 +11,7 @@
     "bg": "bg-pink",
     "ages": "0-3 años",
     "pages_count": 8,
+    "cover_image": "products/cuentos/arca-de-noe/cover.jpg",
     "stripe_payment_link": "https://buy.stripe.com/28EaEP4dkeQD1eJ3MX1VK01"
   },
   {
@@ -25,6 +26,7 @@
     "bg": "bg-mint",
     "ages": "0-3 años",
     "pages_count": 8,
+    "cover_image": "products/cuentos/cocodrilo-en-la-cueva/cover.jpg",
     "stripe_payment_link": "https://buy.stripe.com/14AcMX8tA8sf9Lf4R11VK03"
   },
   {
@@ -39,6 +41,7 @@
     "bg": "bg-lavender",
     "ages": "0-3 años",
     "pages_count": 8,
+    "cover_image": "products/cuentos/estrellita-donde-estas/cover.jpg",
     "stripe_payment_link": "https://buy.stripe.com/8x28wHbFMdMz0aF4R11VK02"
   }
 ]
