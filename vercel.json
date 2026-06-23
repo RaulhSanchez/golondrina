@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "",
+  "buildCommand": "python3 generate.py",
   "outputDirectory": ".",
   "functions": {
     "api/payment-webhook.js": {
