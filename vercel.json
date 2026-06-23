@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "python3 generate.py",
   "outputDirectory": ".",
   "functions": {
     "api/payment-webhook.js": {
@@ -12,13 +11,24 @@
   "headers": [
     {
       "source": "/success.html",
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
     },
     {
       "source": "/products/(.*)/assets/pages/(.*)",
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
-        { "key": "Cache-Control", "value": "no-store" }
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
       ]
     }
   ]
